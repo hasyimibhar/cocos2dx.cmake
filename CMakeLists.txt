@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.8.10)
 
-set(COCOS_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/cocos2dx/cocos2d)
+set(COCOS_SOURCE_DIR ${CMAKE_CURRENT_SOURCE_DIR}/cocos2dx/cocos2dx)
 
 INCLUDE_DIRECTORIES("${COCOS_SOURCE_DIR}"
 					"${COCOS_SOURCE_DIR}/include" 
