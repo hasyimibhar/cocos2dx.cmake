@@ -91,7 +91,7 @@ ELSEIF(WIN32)
   endif()
   
 	INCLUDE_DIRECTORIES(${COCOS_SOURCE_DIR}/platform/win32 
-							${INSTALL_DIR}/include
+							${CMAKE_INSTALL_PREFIX}/include
 							${XML2_PATH}
 							${ZLIB_PATH}
 							${PNG_PATH}
@@ -99,7 +99,7 @@ ELSEIF(WIN32)
 							${TIFF_PATH}
 							${WINICONV_PATH})
 					
-	LINK_DIRECTORIES(${PROJECT_SOURCE_DIR}/external/lib ${INSTALL_DIR}/lib)
+	LINK_DIRECTORIES(${PROJECT_SOURCE_DIR}/external/lib ${CMAKE_INSTALL_PREFIX}/lib)
 
 	add_definitions( "-DPTW32_STATIC_LIB" "-DLIBXML_STATIC")
 	set( EXTERNAL_LIBS curl glew32 iconv jpeg opengl32 png pthread tiff ws2_32 xml2 zlib )
