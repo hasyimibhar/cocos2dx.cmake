@@ -90,19 +90,15 @@ ELSEIF(WIN32)
 	set( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -fpermissive" )
   endif()
   
-	INCLUDE_DIRECTORIES(${COCOS_SOURCE_DIR}/platform/win32 
-							${CMAKE_INSTALL_PREFIX}/include
-							${XML2_PATH}
-							${ZLIB_PATH}
-							${PNG_PATH}
-							${JPEG_PATH}
-							${TIFF_PATH}
-							${WINICONV_PATH})
-					
-	LINK_DIRECTORIES(${PROJECT_SOURCE_DIR}/external/lib ${CMAKE_INSTALL_PREFIX}/lib)
+	INCLUDE_DIRECTORIES(
+	${COCOS_SOURCE_DIR}/platform/win32 
+	${CMAKE_INSTALL_PREFIX}/include)
+	
+	LINK_DIRECTORIES(
+	${CMAKE_INSTALL_PREFIX}/lib)
 
 	add_definitions( "-DPTW32_STATIC_LIB" "-DLIBXML_STATIC")
-	set( EXTERNAL_LIBS curl glew32 iconv jpeg opengl32 png pthread tiff ws2_32 xml2 zlib )
+	set( EXTERNAL_LIBS libcurl_imp glew iconv libjpeg opengl32 libpng pthreadsVC2d libtiff ws2_32 xml2 zlib )
 	
 	file( GLOB PLATFORM_SRCS 
 	"${COCOS_SOURCE_DIR}/platform/win32/*.c*" )
