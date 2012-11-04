@@ -98,7 +98,7 @@ ELSEIF(WIN32)
 	${CMAKE_INSTALL_PREFIX}/lib)
 
 	add_definitions( "-DPTW32_STATIC_LIB" "-DLIBXML_STATIC")
-	set( EXTERNAL_LIBS libcurl_imp glew iconv libjpeg opengl32 libpng pthreadsVC2d libtiff ws2_32 xml2 zlib )
+	set( EXTERNAL_LIBS libcurl_imp glew iconv libjpeg opengl32 libpng pthreadsVC2d libtiff ws2_32 libxml2 zlibd )
 	
 	file( GLOB PLATFORM_SRCS 
 	"${COCOS_SOURCE_DIR}/platform/win32/*.c*" )
