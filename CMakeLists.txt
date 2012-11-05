@@ -39,6 +39,40 @@ file( GLOB COCOS2DX_SRCS
 "${COCOS_SOURCE_DIR}/tileMap_parallax_nodes/*.c*"
 "${COCOS_SOURCE_DIR}/touch_dispatcher/*.c*"
 )
+
+file( GLOB_RECURSE COCOS2DX_API
+"${COCOS_SOURCE_DIR}/*.c*" 
+"${COCOS_SOURCE_DIR}/actions/*.c*"
+"${COCOS_SOURCE_DIR}/base_nodes/*.c*"		
+"${COCOS_SOURCE_DIR}/cocoa/*.c*"
+"${COCOS_SOURCE_DIR}/effects/*.c*"
+"${COCOS_SOURCE_DIR}/extensions/CCBReader/*.c*"
+"${COCOS_SOURCE_DIR}/extensions/CCControlExtension/*.c*"
+"${COCOS_SOURCE_DIR}/extensions/CCListView/*.c*"
+"${COCOS_SOURCE_DIR}/extensions/CCNotificationCenter/*.c*"
+"${COCOS_SOURCE_DIR}/extensions/CCScrollView/*.c*"
+"${COCOS_SOURCE_DIR}/extensions/CCTextureWatcher/*.c*"
+"${COCOS_SOURCE_DIR}/kazmath/src/*.c*"
+"${COCOS_SOURCE_DIR}/kazmath/src/GL/*.c*"
+"${COCOS_SOURCE_DIR}/keypad_dispatcher/*.c*"
+"${COCOS_SOURCE_DIR}/label_nodes/*.c*"
+"${COCOS_SOURCE_DIR}/layers_scenes_transitions_nodes/*.c*"
+"${COCOS_SOURCE_DIR}/menu_nodes/*.c*"
+"${COCOS_SOURCE_DIR}/misc_nodes/*.c*"
+"${COCOS_SOURCE_DIR}/particle_nodes/*.c*"
+"${COCOS_SOURCE_DIR}/platform/*.c*"
+"${COCOS_SOURCE_DIR}/script_support/*.c*"
+"${COCOS_SOURCE_DIR}/shaders/*.c*"
+"${COCOS_SOURCE_DIR}/sprite_nodes/*.c*"
+"${COCOS_SOURCE_DIR}/support/*.c*"
+"${COCOS_SOURCE_DIR}/support/data_support/*.c*"
+"${COCOS_SOURCE_DIR}/support/image_support/*.c*"
+"${COCOS_SOURCE_DIR}/support/zip_support/*.c*" #?todo
+"${COCOS_SOURCE_DIR}/text_input_node/*.c*"
+"${COCOS_SOURCE_DIR}/textures/*.c*"
+"${COCOS_SOURCE_DIR}/tileMap_parallax_nodes/*.c*"
+"${COCOS_SOURCE_DIR}/touch_dispatcher/*.c*"
+)
 				
 IF(ANDROID)
 
@@ -96,8 +130,8 @@ ELSEIF(WIN32)
 	
 	LINK_DIRECTORIES(
 	${CMAKE_INSTALL_PREFIX}/lib)
-
-	add_definitions( "-DPTW32_STATIC_LIB" "-DLIBXML_STATIC")
+#"-DLIBXML_STATIC"
+	add_definitions( "-DPTW32_STATIC_LIB" "-DGLEW_STATIC" )
 	set( EXTERNAL_LIBS libcurl_imp glew iconv libjpeg opengl32 libpng pthreadsVC2d libtiff ws2_32 libxml2 zlibd )
 	
 	file( GLOB PLATFORM_SRCS 
@@ -108,3 +142,26 @@ ELSEIF(WIN32)
 ENDIF()
 
 target_link_libraries(cocos2dx  ${EXTERNAL_LIBS})
+
+
+#set_target_properties(glew PROPERTIES PUBLIC_HEADER "${API}")
+
+set(BINDIR bin)
+set(BINCOMPONENT runtime)
+set(LIBDIR lib)
+set(LIBCOMPONENT dev)
+set(INCLUDEDIR include)
+set(INCLUDECOMPONENT dev)
+
+install(TARGETS cocos2dx
+	RUNTIME DESTINATION ${BINDIR} COMPONENT ${BINCOMPONENT}
+	LIBRARY DESTINATION ${LIBDIR} COMPONENT ${LIBCOMPONENT}
+	ARCHIVE DESTINATION ${LIBDIR} COMPONENT ${LIBCOMPONENT})
+
+#specific for cocos2dx
+install(DIRECTORY ${COCOS_SOURCE_DIR}/
+    DESTINATION ${INCLUDEDIR} COMPONENT ${INCLUDECOMPONENT}
+    FILES_MATCHING
+    PATTERN "*.h"
+    PATTERN ".git*" EXCLUDE
+    PERMISSIONS OWNER_READ OWNER_WRITE GROUP_READ WORLD_READ)
